@@ -8,13 +8,13 @@ var db = mongoose.connection;
 
 //handle mongo error
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function () {
   // we're connected!
 });
 
 
 // serve static files from /public
-app.use(express.static(__dirname + '/template'));
+app.use(express.static(__dirname + '/templateLogReg'));
 
 // include routes
 var routes = require('./routes/router');
@@ -31,11 +31,9 @@ app.use(function (req, res, next) {
 // define as the last app.use callback
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
-  res.json('error', {
-    message: err.message,
-    error: {}
-  });
+  res.send(err.message);
 });
+
 
 // listen on port 3000
 app.listen(3000, function () {
