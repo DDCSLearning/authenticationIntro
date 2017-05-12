@@ -4,7 +4,7 @@ var router = express.Router();
 
 // GET /
 router.get('/', function(req, res, next) {
-  return res.send("working");
+  return res.sendFile(path.join(__dirname+'/template/index.html'));
 });
 
 
