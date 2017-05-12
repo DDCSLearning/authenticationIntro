@@ -10,8 +10,7 @@ router.get('/', function (req, res, next) {
 
 // GET route after registering
 router.get('/register', function (req, res, next) {
-  console.log("registered");
-  return res.send('registered');
+  return res.send('GET registered');
 });
 
 //POST route for updating data
@@ -49,6 +48,11 @@ router.post('/', function (req, res, next) {
     err.status = 400;
     return next(err);
   }
+});
+
+// POST route after registering
+router.post('/register', function (req, res, next) {
+  return res.send('POST registered');
 });
 
 
