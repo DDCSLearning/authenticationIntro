@@ -8,12 +8,36 @@ router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
 });
 
+// GET route after registering
+router.get('/register', function (req, res, next) {
+  console.log("registered");
+  return res.send('registered');
+});
+
 //POST route for updating data
 router.post('/', function (req, res, next) {
   if (req.body.email &&
-    req.body.password) {
+    req.body.username &&
+    req.body.password &&
+    req.body.passwordConf) {
 
-     } else {
+    var userData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+      passwordConf: req.body.passwordConf,
+    }
+
+    //use schema.create to insert data into the db
+    User.create(userData, function (err, user) {
+      if (err) {
+        return next(err)
+      } else {
+        return res.redirect('/profile');
+      }
+    });
+
+  } else {
     var err = new Error('Alle field have to be filled out');
     err.status = 400;
     return next(err);

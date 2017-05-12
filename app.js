@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/testForAuth');
 var db = mongoose.connection;
 
 //handle mongo error
@@ -12,8 +13,12 @@ db.once('open', function () {
   // we're connected!
 });
 
+// parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// serve static files from /public
+
+// serve static files from template
 app.use(express.static(__dirname + '/templateLogReg'));
 
 // include routes
