@@ -7,7 +7,7 @@
   "license": "none",
   "scripts": {
     "start": "node app",
-    "watch": "nodemon app"
+    "watch": "nodemon app && mongod"
   },
   "dependencies": {
     "express": "^4.15.2",
