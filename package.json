@@ -5,6 +5,10 @@
   "repository": "https://github.com/DDCSLearning/authenticationIntro.git",
   "author": "DanielDeutsch <deudan1010@gmail.com>",
   "license": "none",
+  "scripts": {
+    "start": "node app",
+    "watch": "nodemon app"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "nodemon": "^1.11.0"
