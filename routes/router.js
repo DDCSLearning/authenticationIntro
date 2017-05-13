@@ -66,7 +66,7 @@ router.get('/profile', function (req, res, next) {
         return next(error);
       } else {
         if (user === null) {
-          var err = new Error('You have not logged in or registered correctly! Go back!');
+          var err = new Error('Not authorized! Go back!');
           err.status = 400;
           return next(err);
         } else {
