@@ -8,10 +8,6 @@ router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
 });
 
-// GET route after registering
-router.get('/profile', function (req, res, next) {
-  return res.send('GET profile');
-});
 
 //POST route for updating data
 router.post('/', function (req, res, next) {
@@ -19,6 +15,7 @@ router.post('/', function (req, res, next) {
   if (req.body.password !== req.body.passwordConf) {
     var err = new Error('Passwords do not match.');
     err.status = 400;
+    res.send("passwords dont match");
     return next(err);
   }
 
@@ -34,47 +31,43 @@ router.post('/', function (req, res, next) {
       passwordConf: req.body.passwordConf,
     }
 
-    //use schema.create to insert data into the db
-    User.create(userData, function (err, user) {
-      if (err) {
-        return next(err)
+    User.create(userData, function (error, user) {
+      if (error) {
+        return next(error);
       } else {
         req.session.userId = user._id;
         return res.redirect('/profile');
       }
     });
 
-  } else {
-    var err = new Error('All fields have to be filled out');
-    err.status = 400;
-    return next(err);
-  }
-
-});
-
-//POST when login
-router.post('/', function(req, res, next) {
-  if (req.body.email && req.body.password) {
-    User.authenticate(req.body.email, req.body.password, function (error, user) {
+  } else if (req.body.logemail && req.body.logpassword) {
+    User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
         var err = new Error('Wrong email or password.');
         err.status = 401;
         return next(err);
-      }  else {
+      } else {
         req.session.userId = user._id;
         return res.redirect('/profile');
       }
     });
   } else {
-    var err = new Error('Email and password are required.');
-    err.status = 401;
+    var err = new Error('All fields required.');
+    err.status = 400;
     return next(err);
   }
-});
+})
 
-// POST route after registering
-router.post('/profile', function (req, res, next) {
-  return res.send('POST profile');
+// GET route after registering
+router.get('/profile', function (req, res, next) {
+  User.findById(req.session.userId)
+    .exec(function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        return res.json({ name: user.name, email: user.email });
+      }
+    });
 });
 
 
