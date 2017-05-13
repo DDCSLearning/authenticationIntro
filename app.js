@@ -3,8 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session');
-
-
+var MongoStore = require('connect-mongo')(session);
 
 //connect to MongoDB
 mongoose.connect('mongodb://localhost/testForAuth');
@@ -20,7 +19,10 @@ db.once('open', function () {
 app.use(session({
   secret: 'work hard',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
 }));
 
 // parse incoming requests
