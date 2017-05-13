@@ -65,10 +65,29 @@ router.get('/profile', function (req, res, next) {
       if (error) {
         return next(error);
       } else {
-        return res.json({ name: user.name, email: user.email });
+        if (user === null) {
+          var err = new Error('You have not logged in or registered correctly! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+        }
       }
     });
 });
 
+// GET for logout logout
+router.get('/logout', function (req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function (err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
 
 module.exports = router;
