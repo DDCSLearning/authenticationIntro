@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('express-session');
+
+
 
 //connect to MongoDB
 mongoose.connect('mongodb://localhost/testForAuth');
@@ -12,6 +15,13 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   // we're connected!
 });
+
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 
 // parse incoming requests
 app.use(bodyParser.json());
