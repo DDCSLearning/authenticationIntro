@@ -5,12 +5,14 @@
 
 # 🌐 Authentication Example with Node.JS and MongoDB [App Progress Status](https://img.shields.io/badge/Status-Finished-0520b7.svg?style=plastic)
 
-A simple dynamic Node.js app for displaying treehouse profile data. 
+---
+A simple example to show how authentication is implemented with Node.JS and MongoDB.
+---
 
 <img src="./preview.png" alt="pic"/>
 
 
 Check out my [post on medium.com](https://medium.com/@ddcreationstudi)
 
-Start with treehouse here:
-<a href="http://referrals.trhou.se/danieldeutsch3" target="_blank"><img src="https://static.teamtreehouse.com/assets/content/referral-badge-grn.png"/></a>
+You can find a more detailed tutorial at treehouse:
+<a href="http://referrals.trhou.se/danieldeutsch3" target="_blank"><img src="https://static.teamtreehouse.com/assets/content/referral-badge-grn.png" height="150"/></a>
