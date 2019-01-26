@@ -47,11 +47,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<h3>Register</h3>
 				
 				<div class="login-form">
-					<form action="/" method="post">
+					<form id="login" action="/" method="post" onsubmit="event.preventDefault(); validateMyForm();">
 						<input type="text" name="email" placeholder="E-mail" required="">
 						<input type="text" name="username" placeholder="Username" required="">
-						<input type="password" name="password" placeholder="Password" required="">
-						<input type="password" name="passwordConf" placeholder="Confirm Password" required="">
+						<input type="password" name="password" placeholder="Password" id="password" required="" >
+						<input type="password" name="passwordConf" placeholder="Confirm Password" id="password_conf" required="">
 						<input type="submit" value="REGISTER">
 					</form>
 				</div>
@@ -63,6 +63,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<div class="copyright">
 		<p> &copy; 2016 Register Login Widget . All rights reserved | Design by <a href="http://w3layouts.com/" target="_blank" >W3layouts</a></p>
-	</div>					
+	</div>	
+
+	<script type="text/javascript">
+		var passWordField = document.getElementById('password')
+		var passWordConfirmField = document.getElementById('password_conf')
+		var form = document.getElementById('login')
+		function validateMyForm(){
+			if(passWordField.value != passWordConfirmField.value){ 
+		    	alert("Passwords do not match. Please try again.");
+		  	} else {
+		  		form.submit()
+		  	}
+		}
+	</script>	
+
 </body>
 </html>
